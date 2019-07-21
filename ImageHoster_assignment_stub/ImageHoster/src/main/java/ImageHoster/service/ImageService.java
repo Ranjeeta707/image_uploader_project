@@ -1,12 +1,11 @@
 package ImageHoster.service;
 
+import ImageHoster.model.Comment;
 import ImageHoster.model.Image;
 import ImageHoster.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -44,6 +43,11 @@ public class ImageService {
     //The method calls the deleteImage() method in the Repository and passes the Image id of the image to be deleted in the database
     public void deleteImage(Integer imageId) {
         imageRepository.deleteImage(imageId);
+    }
+
+    public Comment addComment(Comment comment) {
+        imageRepository.addComment(comment);
+        return comment;
     }
 
 }

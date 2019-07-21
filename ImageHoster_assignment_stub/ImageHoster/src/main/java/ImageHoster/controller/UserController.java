@@ -45,9 +45,9 @@ public class UserController {
         /*userService.registerUser(user);
         return "redirect:/users/login";*/
 
-        System.out.println("registerUser");
+
         if(userService.registerUser(user)==true){
-            System.out.println("registerUser1");
+
             return "redirect:/users/login";}
         else
         {

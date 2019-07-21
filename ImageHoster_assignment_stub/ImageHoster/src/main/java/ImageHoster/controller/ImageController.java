@@ -1,5 +1,6 @@
 package ImageHoster.controller;
 
+import ImageHoster.model.Comment;
 import ImageHoster.model.Image;
 import ImageHoster.model.Tag;
 import ImageHoster.model.User;
@@ -48,8 +49,10 @@ public class ImageController {
     @RequestMapping("/images/{imageId}/{title}")
     public String showImage(@PathVariable("imageId") Integer imageId,@PathVariable("title") String title, Model model) {
         Image image = imageService.getImage(imageId);
+
         model.addAttribute("image", image);
         model.addAttribute("tags", image.getTags());
+
         return "images/image";
     }
 
