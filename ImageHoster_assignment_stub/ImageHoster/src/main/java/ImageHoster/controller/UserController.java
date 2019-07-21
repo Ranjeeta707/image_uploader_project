@@ -23,6 +23,7 @@ public class UserController {
 
     @Autowired
     private ImageService imageService;
+    String error = "Password must contain atleast 1 alphabet, 1 number & 1 special character";
 
     //This controller method is called when the request pattern is of type 'users/registration'
     //This method declares User type and UserProfile type object
@@ -40,9 +41,22 @@ public class UserController {
     //This controller method is called when the request pattern is of type 'users/registration' and also the incoming request is of POST type
     //This method calls the business logic and after the user record is persisted in the database, directs to login page
     @RequestMapping(value = "users/registration", method = RequestMethod.POST)
-    public String registerUser(User user) {
-        userService.registerUser(user);
-        return "redirect:/users/login";
+    public String registerUser(User user, Model model) {
+        /*userService.registerUser(user);
+        return "redirect:/users/login";*/
+
+        System.out.println("registerUser");
+        if(userService.registerUser(user)==true){
+            System.out.println("registerUser1");
+            return "redirect:/users/login";}
+        else
+        {
+            UserProfile profile = new UserProfile();
+            user.setProfile(profile);
+            model.addAttribute("User", user);
+            model.addAttribute("passwordTypeError",error);
+            return "users/registration";
+        }
     }
 
     //This controller method is called when the request pattern is of type 'users/login'
